@@ -27,5 +27,5 @@ urlpatterns = [
     # equipamentos.com/editar
     path('editar/<int:equipamento_id>/', views.editar_equipamento, name="editar_equipamento"),
     # equipamentos.com/excluir
-    path('delete_user/<int:equipamento_id>/',views.delete_equipment, name='delete_equipment'),
+    path('delete_equipment/<int:equipamento_id>/',views.delete_equipment, name='delete_equipment'),
 ]

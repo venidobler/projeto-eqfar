@@ -12,7 +12,7 @@
         </a>
         <div class="mr-80">
             <a href="{% url 'cadastro_equipamento' %}"
-                class="bg-blue-500 hover:bg-blue-700 py-2 rounded-md text-gray-50 hover:text-gray-700 text-center px-4">
+                class="bg-violet-500 hover:bg-violet-700 py-2 rounded-md text-white font-bold text-center px-4">
                 Novo Equipamento
             </a>
         </div>
@@ -40,21 +40,16 @@
                             Nome
                         </th>
                         <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-black text-center">
-                            Email
+                            TAG
                         </th>
 
                         <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-black text-center">
-                            CPF
+                            Modelo
                         </th>
 
                         <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-black text-center">
-                            RG
+                            Marca
                         </th>
-
-                        <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-black text-center">
-                            Cargo
-                        </th>
-
 
                         <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-black text-center">
                             Ações
@@ -66,7 +61,7 @@
                     <tr class="hover:bg-gray-200 hover:text-gray-900">
                         {% for equipamento in equipamentos%}
                         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
-                            {{equipamento.id}}
+                            {{equipamento.id_equipamento}}
                         </td>
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
                             {{equipamento.nome}}
@@ -89,7 +84,7 @@
                                         class="text-black focus:ring-4 focus:ring-black font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
                                             class="fa-solid fa-pen-to-square"></i></button>
                                 </form>
-                                <form class="delete-form" method="POST" action="{% url 'delete_user' equipamento.id_equipamento %}">
+                                <form class="delete-form" method="POST" action="{% url 'delete_equipment' equipamento.id_equipamento %}">
                                     {% csrf_token %}
                                     <button type="submit" class="delete-user-btn text-black focus:ring-4 focus:ring-black font-medium round-lg text-sm px-3 py-2.5 mr-2 mb-2 hover:bg-gray-300">
                                         <i class="fa-solid fa-trash"></i>
