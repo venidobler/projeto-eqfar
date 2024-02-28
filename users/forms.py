@@ -12,20 +12,20 @@ class UsuarioForm(forms.ModelForm):
     def clean_idade(self):
         idade = self.cleaned_data.get('idade')
         if idade < 18 or idade >125:
-            raise ValidationError('A idade deve ser maior ou igual a 18 anos ou neor ou igual a 125 anos.')
+            raise ValidationError('A idade deve ser maior ou igual a 18 anos ou menor ou igual a 125 anos.')
         return idade
 
     # Validação de CPF
     def clean_cpf(self):
         cpf = self.cleaned_data.get('cpf')
-        if not cpf.isdigit() or len(cpf) != 11:
+        if not str(cpf).isdigit() or len(cpf) != 11:
             raise ValidationError('CPF inválido. Deve conter apenas números e ter 11 dígitos.')
         return cpf
 
     # Validação de RG
     def clean_rg(self):
         rg = self.cleaned_data.get('rg')
-        if not rg.isdigit() or len(rg) != 9:
+        if not str(rg).isdigit() or len(rg) != 9:
             raise ValidationError('RG inválido. Deve conter apenas números e ter 9 dígitos.')
         return rg
 
@@ -40,22 +40,22 @@ class UsuarioForm(forms.ModelForm):
     # Validação de telefone
     def clean_telefone(self):
         telefone = self.cleaned_data.get('telefone')
-        if not telefone.isdigit() or len(telefone) < 9:
+        if not str(telefone).isdigit() or len(telefone) < 9:
             raise ValidationError('Telefone inválido. Deve conter apenas números e ter pelo menos 9 dígitos.')
         return telefone
 
     # Validação de CEP
     def clean_cep(self):
         cep = self.cleaned_data.get('cep')
-        if not cep.isdigit() or len(cep) != 8:
+        if not str(cep).isdigit() or len(cep) != 8:
             raise ValidationError('CEP inválido. Deve conter apenas números e ter 8 dígitos.')
         return cep
 
     # Validação de número
     def clean_numero(self):
         numero = self.cleaned_data.get('numero')
-        if not numero.isdigit():
-            raise ValidationError('Número inválido. Deve conter apenas números.')
+        if not str(numero).isdigit():
+            raise ValidationError('Número deve conter apenas dígitos.')
         return numero
 
 class UsuarioEditForm(forms.ModelForm):
@@ -73,14 +73,14 @@ class UsuarioEditForm(forms.ModelForm):
     # Validação de CPF
     def clean_cpf(self):
         cpf = self.cleaned_data.get('cpf')
-        if not cpf.isdigit() or len(cpf) != 11:
+        if not str(cpf).isdigit() or len(cpf) != 11:
             raise ValidationError('CPF inválido. Deve conter apenas números e ter 11 dígitos.')
         return cpf
     
     # Validação de RG
     def clean_rg(self):
         rg = self.cleaned_data.get('rg')
-        if not rg.isdigit() or len(rg) != 9:
+        if not str(rg).isdigit() or len(rg) != 9:
             raise ValidationError('RG inválido. Deve conter apenas números e ter 9 dígitos.')
         return rg
 
@@ -94,20 +94,20 @@ class UsuarioEditForm(forms.ModelForm):
     # Validação de telefone
     def clean_telefone(self):
         telefone = self.cleaned_data.get('telefone')
-        if not telefone.isdigit() or len(telefone) < 9:
+        if not str(telefone).isdigit() or len(telefone) < 9:
             raise ValidationError('Telefone inválido. Deve conter apenas números e ter pelo menos 9 dígitos.')
         return telefone
 
     # Validação de CEP
     def clean_cep(self):
         cep = self.cleaned_data.get('cep')
-        if not cep.isdigit() or len(cep) != 8:
+        if not str(cep).isdigit() or len(cep) != 8:
             raise ValidationError('CEP inválido. Deve conter apenas números e ter 8 dígitos.')
         return cep
 
     # Validação de número
     def clean_numero(self):
         numero = self.cleaned_data.get('numero')
-        if not numero.isdigit():
+        if not str(numero).isdigit():
             raise ValidationError('Número inválido. Deve conter apenas números.')
         return numero
