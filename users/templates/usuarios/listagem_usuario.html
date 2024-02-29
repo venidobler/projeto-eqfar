@@ -6,14 +6,14 @@
     <div class="flex justify-between items-center top-bar">
         <a href="{% url 'home_usuario'%}">
             <button type="button"
-                class="text-white focus:ring-4 focus:ring-black font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2 hover:bg-gray-300">
-                <i class="fa-solid fa-arrow-left"></i><span class="ml-2">Voltar</span>
+                class="text-white focus:ring-4 focus:ring-black font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2 hover:bg-violet-700">
+                <i class="fas fa-arrow-left"></i><span class="ml-2">Voltar</span>
             </button>
         </a>
         <div class="mr-80">
             <a href="{% url 'cadastro_usuario' %}"
                 class="bg-violet-500 hover:bg-violet-700 py-2 rounded-md text-white font-bold text-center px-4">
-                Novo Usuario
+                Novo Usuário
             </a>
         </div>
     </div>
@@ -22,7 +22,7 @@
             <div class="title">
                 <div class="text-center">
                     <h1 class="text-2xl font-bold py-3 text-white">
-                        Listagem de Usuarios
+                        Listagem de Usuários
                     </h1>
                 </div>
             </div>
@@ -94,7 +94,8 @@
                                 </form>
                                 <form class="delete-form" method="POST" action="{% url 'delete_user' usuario.id_usuario %}">
                                     {% csrf_token %}
-                                    <button type="submit" class="delete-user-btn text-black focus:ring-4 focus:ring-black font-medium round-lg text-sm px-3 py-2.5 mr-2 mb-2 hover:bg-gray-300">
+                                    <button type="submit"
+                                     class="delete-user-btn text-black focus:ring-4 focus:ring-black font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2 hover:bg-gray-300">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>              
