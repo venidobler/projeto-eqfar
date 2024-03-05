@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Registro{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Adicione estilos específicos para a página de login aqui se necessário */
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-md w-full bg-indigo-300 p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-semibold text-gray-700 mb-8 text-center">Registro</h2>
+    <form action="." method="post" autocomplete="off">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+      
+        <button type="submit" class="w-full bg-indigo-500 text-white font-bold py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">Criar Conta</button>
+    </form>
+    <p class="text-sm text-gray-700 mt-4 text-center"> <a href="{% url 'login'%}" class="text-indigo-600 hover:text-indigo-800">Fazer login</a></p>
+</div>
+{% endblock %}
