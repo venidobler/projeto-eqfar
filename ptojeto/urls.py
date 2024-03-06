@@ -29,9 +29,7 @@ urlpatterns = [
     path('cadastro_usuario/',include('users.urls')),
     path('cadastro_equipamento/',include('equipments.urls')),
     path('cadastro_produto/', include('products.urls')),
-    
     path('login/', include('login.urls')),
-
     
 ]
 
