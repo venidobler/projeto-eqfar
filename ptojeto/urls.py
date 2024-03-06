@@ -24,11 +24,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-     path('login/', include('login.urls')),
+     
     path('', include('home.urls')),
     path('cadastro_usuario/',include('users.urls')),
     path('cadastro_equipamento/',include('equipments.urls')),
-    path('cadastro_produto/', include('products.urls'))
+    path('cadastro_produto/', include('products.urls')),
+    
+    path('login/', include('login.urls')),
+
+    
 ]
 
 if settings.DEBUG:

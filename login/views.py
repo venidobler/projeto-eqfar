@@ -24,7 +24,7 @@ def registro(request):
     return render(request, template_name, context)
 
 
-def login(request):
+def login_view(request):
     template_name = 'login.html'
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -38,14 +38,9 @@ def login(request):
     return render(request, template_name, {})
 
 
-@login_required(login_url='/login/')
-def user_profile(request):
-    template_name = 'home.html'
-    return render(request, template_name, {})
-
 
 @login_required(login_url='/login/')
 def user_logout(request):
     logout(request)
     messages.success(request, 'Você saiu do sistema.')
-    return redirect('accounts:login')
+    return redirect('login')
