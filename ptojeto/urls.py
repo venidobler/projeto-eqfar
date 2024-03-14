@@ -19,7 +19,6 @@ from equipments import views
 from users import views
 from home import views
 from login import views
-from products import views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -27,8 +26,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('login/', include('login.urls')),
     path('cadastro_usuario/',include('users.urls')),
-    path('cadastro_equipamento/',include('equipments.urls')),
-    path('cadastro_produto/', include('products.urls'))
+    path('cadastro_equipamento/',include('equipments.urls'))
 ]
 
 if settings.DEBUG:
