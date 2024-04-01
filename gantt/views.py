@@ -20,4 +20,4 @@ def index(request):
     fig.update_yaxes(autorange="reversed")
     gantt_plot = plot(fig, output_type="div")
     context = {'plot_div': gantt_plot}
-    return render(request, 'index.html', context)
+    return render(request, 'pages/index.html', context)
