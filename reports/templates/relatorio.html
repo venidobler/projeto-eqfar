@@ -6,6 +6,12 @@
     <title>Relatório</title>
 </head>
 <body>
-    <h1>Relatórios</h1>
+    <h1>Relatório do Equipamento</h1>
+<ul>
+    {% for task in tasks %}
+        <li>{{ task.name }} - {{ task.start_date }} to {{ task.finish_date }}</li>
+    {% endfor %}
+</ul>
+
 </body>
 </html>
