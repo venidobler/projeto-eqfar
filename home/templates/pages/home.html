@@ -7,7 +7,7 @@
 <nav class="bg-purple-800 p-4 fixed w-full top-0 z-50">
     <div class="container mx-auto flex justify-between items-center">
         <!-- Logo -->
-        <a href="#" class="text-white font-bold text-xl"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="#" class="text-white font-bold text-xl"><i class="fa-solid fa-house"></i> Home</a>
         
         <!-- Navbar Links -->
         <ul class="flex space-x-4 text-white">
@@ -37,7 +37,7 @@
                 </div>
             </li>
             <li>
-                <a href="#" class="hover:bg-purple-700 px-4 py-2 rounded">Relatório</a>
+            <a href="{% url 'acessar_admin' %}" class="hover:bg-purple-700 px-4 py-2 rounded">Gantt</a>
             </li>
             <li>
                 <a href="{% url 'login'%}" class="hover:bg-purple-700 px-4 py-2 rounded"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
