@@ -34,7 +34,7 @@ urlpatterns = [
     path('cadastro_produto/', include('products.urls')),
     path('', include('login.urls')),
     path('admin/', admin.site.urls),
-    path('index/', index),
+    path('index_gantt/', include('gantt.urls')),
     
 ]
 

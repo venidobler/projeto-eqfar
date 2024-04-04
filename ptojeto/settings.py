@@ -59,6 +59,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'ptojeto.urls'
 
+ADMIN_SITE_TEMPLATE = 'admin/base_site.html'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
