@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Devolução de Equipamento
+{% endblock %}
+
+{% block conteudo %}
+<div class="container mt-5">
+    <h2 class="text-white">Devolução de Equipamento</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="equipamento" class="form-label text-white">Equipamento</label>
+            <select class="form-select" id="equipamento" name="equipamento">
+                {% for emprestimo in emprestimos %}
+                    <option value="{{ emprestimo.equipamento.id }}">{{ emprestimo.equipamento.nome }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="data_devolucao" class="form-label text-white">Data de Devolução</label>
+            <input type="date" class="form-control" id="data_devolucao" name="data_devolucao">
+        </div>
+        <button type="submit" class="btn btn-primary">Confirmar Devolução</button>
+    </form>
+</div>
+{% endblock %}

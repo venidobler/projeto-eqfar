@@ -37,6 +37,15 @@
                     <a href="{% url 'listagem_produto'%}" class="block px-4 py-2 hover:bg-purple-700">Listagem</a>
                 </div>
             </li>
+            <li class="relative">
+                <a href="#" class="hover:bg-purple-700 px-4 py-2 rounded">Empréstimos</a>
+                <!-- Dropdown Content - Products -->
+                <div class="hidden absolute bg-purple-800 text-white rounded shadow mt-2 py-2 w-48 z-10">
+                    <a href="{% url 'emprestimo_view'%}" class="block px-4 py-2 hover:bg-purple-700">Empréstimo</a>
+                    
+                    <a href="{% url 'devolucao_view'%}" class="block px-4 py-2 hover:bg-purple-700">Devolução</a>
+                </div>
+            </li>
             <li>
             <a href="{% url 'acessar_admin' %}" class="hover:bg-purple-700 px-4 py-2 rounded">Gantt</a>
             </li>
