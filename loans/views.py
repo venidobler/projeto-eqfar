@@ -27,7 +27,8 @@ def emprestimo_view(request):
     
     equipamentos = Equipamento.objects.all()
     usuarios = Usuario.objects.all()
-    return render(request, 'emprestimo.html', {'equipamentos': equipamentos, 'usuarios': usuarios})
+    return render(request, 'loans/pages/emprestimo.html', {'equipamentos': equipamentos, 'usuarios': usuarios})
+
 
 def devolucao_view(request):
     if request.method == 'POST':
@@ -41,4 +42,5 @@ def devolucao_view(request):
         return redirect('devolucao_view')
     
     emprestimos = Emprestimo.objects.filter(data_devolucao=None)
-    return render(request, 'devolucao.html', {'emprestimos': emprestimos})
+    return render(request, 'loans/pages/devolucao.html', {'emprestimos': emprestimos})
+
