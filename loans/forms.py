@@ -18,6 +18,12 @@ class EmprestimoForm(forms.ModelForm):
             'responsavel': forms.Select(attrs={'class': 'w-full h-10 border border-black rounded-md'}),
         }
         
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Filtrar os equipamentos ativos (status=True)
+        self.fields['equipamento'].queryset = Equipamento.objects.filter(status=True)
+        
+        
 class DevolucaoForm(forms.ModelForm):
     id_emprestimo = forms.IntegerField(widget=forms.HiddenInput())
 
