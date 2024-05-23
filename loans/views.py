@@ -1,47 +1,51 @@
-# Em loans/views.py
 
-# loans/views.py
-
-from django.shortcuts import redirect, render
-
-from users.models import Usuario
-from .models import Emprestimo
+from django.shortcuts import render, redirect
 from equipments.models import Equipamento
-from .forms import EmprestimoForm
+from loans.forms import DevolucaoForm, EmprestimoForm
+from django.http import HttpResponseNotFound
 
 def emprestimo_view(request):
-    form = EmprestimoForm(request.POST or None)
     if request.method == 'POST':
+        form = EmprestimoForm(request.POST)
         if form.is_valid():
-            # Salvar o empréstimo primeiro
-            emprestimo = form.save()
-            
-            # Atualizar o status do equipamento usando a instância do empréstimo salva
-            equipamento_emprestado = emprestimo.equipamento
-            equipamento_emprestado.status = False
-            equipamento_emprestado.save()
-
+            emprestimo = form.save(commit=False)
+            emprestimo.save()
+            equipamento = Equipamento.objects.get(id_equipamento=emprestimo.equipamento_id)
+            equipamento.status = False
+            equipamento.save()
             return redirect('index_gantt')
-    
-    equipamentos = Equipamento.objects.all()
-    usuarios = Usuario.objects.all()
-    return render(request, 'pages/emprestimo.html', {'form': form, 'equipamentos': equipamentos, 'usuarios': usuarios})
+        else:
+            return render(request, 'pages/emprestimo.html', {'form': form})
+    form = EmprestimoForm()
+    return render(request, 'pages/emprestimo.html', {'form': form})
+
+
+
+
 
 def devolucao_view(request):
     if request.method == 'POST':
-        equipamento_id = request.POST['equipamento']
-        data_devolucao = request.POST['data_devolucao']
-        
-        emprestimo = Emprestimo.objects.get(equipamento_id=equipamento_id, data_devolucao=None)
-        emprestimo.data_devolucao = data_devolucao
-        emprestimo.save()
-        
-        # Atualiza o status do equipamento para ativo ao devolver
-        equipamento = emprestimo.equipamento
-        equipamento.status = True
-        equipamento.save()
-        
-        return redirect('devolucao_view')
-    
-    emprestimos = Emprestimo.objects.filter(data_devolucao=None)
-    return render(request, 'pages/devolucao.html', {'emprestimos': emprestimos})
+        form = DevolucaoForm(request.POST)
+        if form.is_valid():
+            equipamento_id = form.cleaned_data['equipamento']
+            data_devolucao = form.cleaned_data['data_devolucao']
+            
+            try:
+                equipamento = Equipamento.objects.get(pk=equipamento_id)
+            except Equipamento.DoesNotExist:
+                # Trate o caso em que o equipamento não existe
+                return HttpResponseNotFound("O equipamento não foi encontrado.")
+            else:
+                # Verificar se o equipamento já está marcado como ativo
+                if not equipamento.status:
+                    # Marcar o equipamento como disponível novamente
+                    equipamento.status = True
+                    equipamento.save()
+                # Redirecionar para a tela index_gantt
+                return redirect('index_gantt')
+    else:
+        form = DevolucaoForm()
+    return render(request, 'pages/devolucao.html', {'form': form})
+
+
+
