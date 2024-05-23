@@ -2,6 +2,9 @@
 {% block title %}Devolução de Equipamento{% endblock %}
 
 {% block content %}
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <div class="container mt-5">
     <div class="form">
         <div class="form-header">
@@ -17,8 +20,14 @@
 
     <form method="POST">
         {% csrf_token %}
-        {{ form.equipamento }}
-        {{ form.data_devolucao }}
+        <div>
+            <label for="id_equipamento">Equipamento:</label>
+            {{ form.equipamento }}
+        </div>
+        <div>
+            <label for="id_data_devolucao">Data de Devolução:</label>
+            {{ form.data_devolucao }}
+        </div>
         <div class="d-flex justify-content-end py-4">
             <a href="{% url 'index_gantt' %}" class="bg-violet-500 hover:bg-violet-700 w-28 text-white font-bold py-2 px-4 rounded">Cancelar</a>
             <button type="submit" class="bg-violet-500 px-4 py-2 w-28 rounded text-white font-bold hover:bg-violet-700 ml-5">Devolução</button>

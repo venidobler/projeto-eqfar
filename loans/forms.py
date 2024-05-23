@@ -29,5 +29,10 @@ class DevolucaoForm(forms.ModelForm):
             'data_devolucao': forms.DateInput(attrs={'placeholder': 'dd/mm/yyyy', 'class': 'w-full h-10 border border-black rounded-md'}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Filtrar os equipamentos disponíveis (status=False)
+        self.fields['equipamento'].queryset = Equipamento.objects.filter(status=False)
+
 
         
