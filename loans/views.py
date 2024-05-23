@@ -13,16 +13,13 @@ def emprestimo_view(request):
     form = EmprestimoForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
-            # Salvar o empréstimo
-            emprestimo = form.save(commit=False)
+            # Salvar o empréstimo primeiro
+            emprestimo = form.save()
             
-            # Atualizar o status do equipamento para inativo
+            # Atualizar o status do equipamento usando a instância do empréstimo salva
             equipamento_emprestado = emprestimo.equipamento
             equipamento_emprestado.status = False
             equipamento_emprestado.save()
-
-            # Salvar o empréstimo no banco de dados
-            emprestimo.save()
 
             return redirect('index_gantt')
     
