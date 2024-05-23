@@ -1,34 +1,34 @@
-from django.shortcuts import render
+# Em loans/views.py
 
-# Create your views here.
-from django.shortcuts import render, redirect
+# loans/views.py
+
+from django.shortcuts import redirect, render
+
+from users.models import Usuario
 from .models import Emprestimo
 from equipments.models import Equipamento
-from users.models import Usuario
-from django.utils import timezone
+from .forms import EmprestimoForm
 
 def emprestimo_view(request):
+    form = EmprestimoForm(request.POST or None)
     if request.method == 'POST':
-        equipamento_id = request.POST['equipamento']
-        responsavel_id = request.POST['responsavel']
-        data_emprestimo = request.POST['data_emprestimo']
-        data_devolucao = request.POST['data_devolucao']
-        
-        equipamento = Equipamento.objects.get(id=equipamento_id)
-        responsavel = Usuario.objects.get(id=responsavel_id)
-        
-        Emprestimo.objects.create(
-            equipamento=equipamento,
-            responsavel=responsavel,
-            data_emprestimo=data_emprestimo,
-            data_devolucao=data_devolucao
-        )
-        return redirect('emprestimo_view')
+        if form.is_valid():
+            # Salvar o empréstimo
+            emprestimo = form.save(commit=False)
+            
+            # Atualizar o status do equipamento para inativo
+            equipamento_emprestado = emprestimo.equipamento
+            equipamento_emprestado.status = False
+            equipamento_emprestado.save()
+
+            # Salvar o empréstimo no banco de dados
+            emprestimo.save()
+
+            return redirect('index_gantt')
     
     equipamentos = Equipamento.objects.all()
     usuarios = Usuario.objects.all()
-    return render(request, 'loans/pages/emprestimo.html', {'equipamentos': equipamentos, 'usuarios': usuarios})
-
+    return render(request, 'pages/emprestimo.html', {'form': form, 'equipamentos': equipamentos, 'usuarios': usuarios})
 
 def devolucao_view(request):
     if request.method == 'POST':
@@ -39,8 +39,12 @@ def devolucao_view(request):
         emprestimo.data_devolucao = data_devolucao
         emprestimo.save()
         
+        # Atualiza o status do equipamento para ativo ao devolver
+        equipamento = emprestimo.equipamento
+        equipamento.status = True
+        equipamento.save()
+        
         return redirect('devolucao_view')
     
     emprestimos = Emprestimo.objects.filter(data_devolucao=None)
-    return render(request, 'loans/pages/devolucao.html', {'emprestimos': emprestimos})
-
+    return render(request, 'pages/devolucao.html', {'emprestimos': emprestimos})

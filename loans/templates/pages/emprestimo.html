@@ -4,36 +4,22 @@
     Empréstimo de Equipamento
 {% endblock %}
 
-{% block conteudo %}
+{% block content %}
+<div class="h-16"></div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <div class="container mt-5">
+    
     <h2 class="text-white">Empréstimo de Equipamento</h2>
+
     <form method="post">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="equipamento" class="form-label text-white">Equipamento</label>
-            <select class="form-select" id="equipamento" name="equipamento">
-                {% for equipamento in equipamentos %}
-                    <option value="{{ equipamento.id }}">{{ equipamento.nome }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="responsavel" class="form-label text-white">Responsável</label>
-            <select class="form-select" id="responsavel" name="responsavel">
-                {% for usuario in usuarios %}
-                    <option value="{{ usuario.id }}">{{ usuario.nome }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="data_emprestimo" class="form-label text-white">Data de Empréstimo</label>
-            <input type="date" class="form-control" id="data_emprestimo" name="data_emprestimo">
-        </div>
-        <div class="mb-3">
-            <label for="data_devolucao" class="form-label text-white">Data de Devolução</label>
-            <input type="date" class="form-control" id="data_devolucao" name="data_devolucao">
-        </div>
-        <button type="submit" class="btn btn-primary">Confirmar Empréstimo</button>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="d-flex justify-content-end">
+        <a href="{% url 'index_gantt'%}" class="bg-violet-500 hover:bg-violet-700 w-28 text-white font-bold py-2 px-4 rounded">Cancelar</a>
+
+        <button type="submit" class="bg-violet-500 px-4 py-2 w-28 rounded text-white font-bold hover:bg-violet-700 ml-5"> Empréstimo</button>
+    </div>
     </form>
+
 </div>
 {% endblock %}
