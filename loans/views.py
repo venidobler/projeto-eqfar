@@ -11,7 +11,7 @@ def emprestimo_view(request):
     if request.method == 'POST':
         # Captura dos dados do formulário
         equipamento_id = request.POST.get('equipamento')
-        responsavel_id = request.POST.get('responsavel')
+        responsavel_id = request.POST.get('responsavel_id')  # Verifique se o nome do campo corresponde ao formulário
         data_emprestimo = request.POST.get('data_emprestimo')
 
         # Validação da data
@@ -37,9 +37,15 @@ def emprestimo_view(request):
         return redirect('index_gantt')
 
     # Se não for POST, renderiza a página de empréstimo sem o formulário
-    equipamentos = Equipamento.objects.all()
+    # Filtrar apenas os equipamentos marcados como ativos
+    equipamentos = Equipamento.objects.filter(status=True)
     usuarios = Usuario.objects.all()
     return render(request, 'pages/emprestimo.html', {'equipamentos': equipamentos, 'usuarios': usuarios})
+
+
+
+
+
 
 
 def devolucao_view(request):
