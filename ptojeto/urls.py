@@ -32,12 +32,9 @@ urlpatterns = [
     path('cadastro_usuario/',include('users.urls')),
     path('cadastro_equipamento/',include('equipments.urls')),
     path('cadastro_produto/', include('products.urls')),
-    path('emprestimo/', include ('loans.urls')),
-    path('devolucao/', include ('loans.urls')),
     path('', include('login.urls')),
     path('admin/', admin.site.urls),
     path('index_gantt/', include('gantt.urls')),
-    
 ]
 
 if settings.DEBUG:
