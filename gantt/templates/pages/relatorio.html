@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="h-16"></div>
+<nav class="bg-purple-800 p-4 fixed w-full top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="#" class="text-white font-bold text-xl"><i class="fa-solid fa-house"></i> Home</a>
+        <ul class="flex space-x-4 text-white">
+            <li>
+                <a href="{% url 'index_gantt' %}" class="hover:bg-purple-700 px-4 py-2 rounded">Voltar</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mx-auto mt-20">
+    <form action="{% url 'exportar_relatorio' %}" method="get">
+        <div class="mb-4">
+            <label for="start_date" class="block text-white text-sm font-bold mb-2">Data de Início:</label>
+            <input type="date" id="start_date" name="start_date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="mb-4">
+            <label for="end_date" class="block text-white text-sm font-bold mb-2">Data de Término:</label>
+            <input type="date" id="end_date" name="end_date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <button type="submit" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Exportar</button>
+    </form>
+</div>
+{% endblock %}
