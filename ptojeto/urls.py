@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.urls import path, include
 from equipments import views
-from users import views
 from home import views
 from login import views
 from products import views
@@ -29,7 +28,7 @@ from gantt.views import index
 urlpatterns = [
      
     path('home/', include('home.urls')),
-    path('cadastro_usuario/',include('users.urls')),
+
     path('cadastro_equipamento/',include('equipments.urls')),
     path('cadastro_produto/', include('products.urls')),
     path('', include('login.urls')),

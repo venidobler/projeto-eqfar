@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'login',
     'home',
     'equipments',
-    'users',
     'reports',
     'products',
     'gantt',

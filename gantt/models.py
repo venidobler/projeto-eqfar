@@ -5,7 +5,7 @@ from equipments.models import Equipamento
 class Gantt(models.Model):
     name = models.CharField(max_length=200) 
     start_date = models.DateField()
-    responsible = models.ForeignKey(User, on_delete=models.CASCADE)
+ 
     week_number = models.CharField(max_length=2, blank=True)
     finish_date = models.DateField()
     equipment = models.ForeignKey(Equipamento, on_delete=models.CASCADE, null=True, default=None)  # Adicionando o campo de equipamento

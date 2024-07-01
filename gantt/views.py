@@ -21,13 +21,13 @@ def index(request):
             'Project': x.name,
             'Start': x.start_date,
             'Finish': x.finish_date,
-            'Responsible': x.responsible.username
         } for x in qs
     ]
     df = pd.DataFrame(projects_data)
     fig = px.timeline(
-        df, x_start="Start", x_end="Finish", y="Project", color="Responsible"
+        df, x_start="Start", x_end="Finish", y="Project"
     )
+    
     fig.update_yaxes(autorange="reversed")
     gantt_plot = plot(fig, output_type="div")
     context = {'plot_div': gantt_plot, 'equipments': equipments, 'selected_equipment_id': selected_equipment_id}
@@ -46,10 +46,10 @@ def exportar_relatorio(request):
     response['Content-Disposition'] = 'attachment; filename="relatorio.csv"'
 
     writer = csv.writer(response)
-    writer.writerow(['Projeto', 'Data de Início', 'Data de Término', 'Responsável'])
+    writer.writerow(['Projeto', 'Data de Início', 'Data de Término'])
 
     for task in qs:
-        writer.writerow([task.name, task.start_date, task.finish_date, task.responsible.username])
+        writer.writerow([task.name, task.start_date, task.finish_date])
 
     return response
 
