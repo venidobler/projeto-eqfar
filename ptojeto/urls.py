@@ -22,6 +22,9 @@ from login import views
 from products import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path
+from gantt.views import index
 
 urlpatterns = [
      
@@ -29,7 +32,11 @@ urlpatterns = [
     path('cadastro_usuario/',include('users.urls')),
     path('cadastro_equipamento/',include('equipments.urls')),
     path('cadastro_produto/', include('products.urls')),
+    path('emprestimo/', include ('loans.urls')),
+    path('devolucao/', include ('loans.urls')),
     path('', include('login.urls')),
+    path('admin/', admin.site.urls),
+    path('index_gantt/', include('gantt.urls')),
     
 ]
 

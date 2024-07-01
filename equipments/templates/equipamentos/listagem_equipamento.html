@@ -1,10 +1,11 @@
-<script src="https://cdn.tailwindcss.com"></script>
-{% extends 'equipamentos/base.html'%}
-{% block conteudo %}
+<!-- equipamentos/listagem_equipamento.html -->
+{% extends 'equipamentos/base.html' %}
+{% block title %}Listagem{% endblock %}
 
+{% block conteudo %}
 <div class="w-full py-1 space-y-5">
     <div class="flex justify-between items-center top-bar">
-        <a href="{% url 'home'%}">
+        <a href="{% url 'index_gantt' %}">
             <button type="button"
                 class="text-white focus:ring-4 focus:ring-black font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2 hover:bg-violet-700">
                 <i class="fa-solid fa-arrow-left"></i><span class="ml-2">Voltar</span>
@@ -35,22 +36,21 @@
                         <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-black text-center">
                             ID
                         </th>
-
                         <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-black text-center">
                             Nome
                         </th>
                         <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-black text-center">
                             TAG
                         </th>
-
                         <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-black text-center">
                             Modelo
                         </th>
-
                         <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-black text-center">
                             Marca
                         </th>
-
+                        <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-black text-center">
+                            Status
+                        </th>
                         <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-black text-center">
                             Ações
                         </th>
@@ -58,43 +58,50 @@
                 </thead>
 
                 <tbody class="divide-y divide-gray-200">
+                    {% for equipamento in equipamentos %}
                     <tr class="hover:bg-gray-200 hover:text-gray-900">
-                        {% for equipamento in equipamentos%}
                         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center">
-                            {{equipamento.id_equipamento}}
+                            {{ equipamento.id_equipamento }}
                         </td>
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                            {{equipamento.nome}}
+                            {{ equipamento.nome }}
                         </td>
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                            {{equipamento.tag}}
+                            {{ equipamento.tag }}
                         </td>
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                            {{equipamento.modelo}}
+                            {{ equipamento.modelo }}
                         </td>
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
-                            {{equipamento.marca}}
+                            {{ equipamento.marca }}
                         </td>
-                        
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
+                            {% if equipamento.status %}
+                            Ativo
+                            {% else %}
+                            Inativo
+                            {% endif %}
+                        </td>
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700 h-8 text-center">
                             <div class="flex justify-center">
-
                                 <form action="{% url 'editar_equipamento' equipamento.id_equipamento %}">
                                     <button type="submit"
                                         class="text-black focus:ring-4 focus:ring-black font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2 hover:bg-gray-300"><i
                                             class="fa-solid fa-pen-to-square"></i></button>
                                 </form>
-                                <form class="delete-form" method="POST" action="{% url 'delete_equipment' equipamento.id_equipamento %}">
+                                <form class="delete-form" method="POST"
+                                    action="{% url 'delete_equipment' equipamento.id_equipamento %}">
                                     {% csrf_token %}
-                                    <button type="submit" class="delete-user-btn text-black focus:ring-4 focus:ring-black font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2 hover:bg-gray-300">
+                                    <button type="submit"
+                                        class="delete-user-btn text-black focus:ring-4 focus:ring-black font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2 hover:bg-gray-300">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
-                                </form>              
+                                </form>
                             </div>
                         </td>
                     </tr>
+                    {% endfor %}
                 </tbody>
-                {% endfor %}
             </table>
         </div>
     </div>

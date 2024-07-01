@@ -7,4 +7,5 @@ class Equipamento(models.Model):
     tag = models.CharField(max_length = 100)
     modelo = models.CharField(max_length = 100)
     marca = models.CharField(max_length = 100)
+    status = models.BooleanField(default=True) 
     objects = models.Manager()

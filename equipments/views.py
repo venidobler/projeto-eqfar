@@ -17,10 +17,8 @@ def cadastro_equipamento(request):
     return render(request, 'equipamentos/cadastro_equipamento.html', {'form': form})
 
 def listagem_equipamento(request):
-    equipamentos = {
-        'equipamentos': Equipamento.objects.all().order_by('id_equipamento')
-    }
-    return render(request, 'equipamentos/listagem_equipamento.html', equipamentos)
+    equipamentos = Equipamento.objects.all().order_by('id_equipamento')
+    return render(request, 'equipamentos/listagem_equipamento.html', {'equipamentos': equipamentos})
 
 def editar_equipamento(request, equipamento_id):
     equipamento = get_object_or_404(Equipamento, id_equipamento=equipamento_id)
