@@ -25,7 +25,7 @@ def index(request):
     ]
     df = pd.DataFrame(projects_data)
     fig = px.timeline(
-        df, x_start="Start", x_end="Finish", y="Project"
+        df, x_start="Start", x_end="Finish", y="Project" , color= "Project"
     )
     
     fig.update_yaxes(autorange="reversed")
