@@ -1,23 +1,22 @@
 <!-- equipamentos/listagem_equipamento.html -->
-{% extends 'equipamentos/base.html' %}
+{% extends 'base.html' %}
 {% block title %}Listagem{% endblock %}
 
-{% block conteudo %}
-<div class="w-full py-1 space-y-5">
-    <div class="flex justify-between items-center top-bar">
-        <a href="{% url 'index_gantt' %}">
-            <button type="button"
-                class="text-white focus:ring-4 focus:ring-black font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2 hover:bg-violet-700">
-                <i class="fa-solid fa-arrow-left"></i><span class="ml-2">Voltar</span>
-            </button>
-        </a>
-        <div class="mr-80">
-            <a href="{% url 'cadastro_equipamento' %}"
-                class="bg-violet-500 hover:bg-violet-700 py-2 rounded-md text-white font-bold text-center px-4">
-                Novo Equipamento
-            </a>
-        </div>
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="h-16"></div>
+<nav class="bg-purple-800 p-4 fixed w-full top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="#" class="text-white font-bold text-xl"><i class="fa-solid fa-house"></i> Home</a>
+        <ul class="flex space-x-4 text-white">
+            <li>
+                <a href="{% url 'index_gantt' %}" class="hover:bg-purple-700 px-4 py-2 rounded">Voltar</a>
+            </li>
+        </ul>
     </div>
+</nav>
+<div class="w-full space-y-5"> <!-- Alterado de py-5 para mt-20 -->
     <div class="flex flex-col items-center">
         <div class="form-header">
             <div class="title">
@@ -29,7 +28,7 @@
             </div>
         </div>
 
-        <div class="mx-auto overflow-x-auto rounded-lg border border border-black late-50 my-auto">
+        <div class="mx-auto overflow-x-auto rounded-lg border border-black my-4"> <!-- Removido my-auto -->
             <table class="min-w-full divide-y-2 divide-black-800 text-sm bg-white">
                 <thead>
                     <tr>
@@ -102,8 +101,14 @@
                     </tr>
                     {% endfor %}
                 </tbody>
-            </table>
+            </table>           
         </div>
     </div>
+    <div class="ml-80">
+        <a href="{% url 'cadastro_equipamento' %}"
+            class="bg-purple-500 hover:bg-purple-700 py-2 rounded-md text-white font-bold text-center px-4">
+            Novo Equipamento
+        </a>
+    </div>     
 </div>
 {% endblock %}
